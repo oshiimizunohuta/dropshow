@@ -2,7 +2,7 @@
  * dropshow.js
  * Since 2019-12-15 15:32:32
  * @author しふたろう
- * ver 0.0.1
+ * ver 0.0.2
  *
  */
 window.onload=function(){
@@ -56,13 +56,14 @@ window.onload=function(){
 				let li = doc.createElement('li');
 				li.appendChild(img);
 				li.id = imglist.childElementCount;
+				li.style.opacity = 1;
 				imglist.appendChild(li);
 				body.insertBefore(li.cloneNode(true), imglist);
 				if(body.childElementCount > 3){
 					body.removeChild(body.firstElementChild);
 				}
-				imglist.seekIndex = imglist.childElementCount - 1;
-				console.log(imglist);
+//				imglist.seekIndex = imglist.childElementCount - 1;
+	//			console.log(imglist.seekIndex);
  			};
  			img.src = e.target.result;
 			img.name = reader.name;
@@ -77,8 +78,15 @@ window.onload=function(){
  * @name startShow
  *
  * @return {[type]} [description]
+ *
  */
+
 	function startShow(){
+		body.replaceChild(imglist.children[imglist.seekIndex].cloneNode(true), body.firstElementChild);
+		fadeShow();
+	}
+
+	function waitShow(){
 		body.timer = setTimeout(function(){
 			body.reqa = requestAnimationFrame(fadeShow)
 		}, intervalTime);
@@ -101,11 +109,11 @@ window.onload=function(){
 		let d = 1 / (fadeTime / 16.67);
 		nx.style.opacity = Math.max(parseFloat(nx.style.opacity) - d, 0);
 		if(nx.style.opacity == 0){
+			imglist.seekIndex = (imglist.seekIndex + 1) % imglist.childElementCount;
 			body.removeChild(imglist.previousElementSibling);
 			body.insertBefore(imglist.childNodes[imglist.seekIndex].cloneNode(true), body.firstElementChild);
 //			imglist.seekIndex = (imglist.seekIndex + 1) % imglist.querySelectorAll('img').length;
-			imglist.seekIndex = (imglist.seekIndex + 1) % imglist.childElementCount;
-			startShow();
+			waitShow();
 			return;
 		}
 		body.reqa = requestAnimationFrame(fadeShow);
