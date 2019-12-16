@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>DropShow</title>
+		<meta name="description" content="ドラッグ&ドロップでスライドショー">
+		<meta name="author" content="しふたろう">
+		<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0"> -->
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="./img/ds.png">
+		<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.png">
+		<!-- <link rel="stylesheet" type="text/css" href="./style.css" media="all"> -->
+
+		<!-- <script src="/js/lib/jquery-2.0.0.min.js"></script> -->
+		<script src="./dropshow.js"></script>
+		<style>
+		html, body{
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+		img{
+			margin:0 1px;
+			line-height: 0;
+		}
+		body>li{
+			height: 100%;
+			margin: 0;
+			line-height: 0;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		ol{
+			background:hsla(196,100%,17%,0.4);
+			margin: 0;
+			padding: 0;
+			height: 22%;
+			position: fixed;
+			width:100%;
+			bottom: 0;
+			line-height: 0;
+			text-align: center;
+		}
+		ol li{
+			height: 90%;
+			margin: auto 2px;
+			display: inline-block;
+			position: relative;
+			top: 5%;
+		}
+
+		 li img{
+			height: 100%;
+			width: auto;
+			margin: auto;
+			position: relative;
+			top: 0;
+			bottom: 0;
+		}
+
+		</style>
+	</head>
+<body style="background:hsl(180, 80%, 4%);"></body>
+</html>
