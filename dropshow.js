@@ -2,7 +2,7 @@
  * dropshow.js
  * Since 2019-12-15 15:32:32
  * @author しふたろう
- * ver 0.0.3
+ * ver 0.0.4
  *
  */
 window.onload=function(){
@@ -69,7 +69,10 @@ window.onload=function(){
 			img.name = reader.name;
 		};
 
-		body.removeChild(body.querySelectorAll('.adsbygoogle'));
+		let ins = body.querySelectorAll('.adsbygoogle');
+		for (let i = 0; i < ins.length; i++){
+			body.removeChild(ins[i]);
+		}
  	}
 
  	body.ondrop = dropFile;
