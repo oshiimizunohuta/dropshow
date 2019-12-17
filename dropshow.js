@@ -34,46 +34,58 @@ window.onload=function(){
  	function dropFile(e)
  	{
  		var i, data = e.dataTransfer
- 			, reader = new FileReader()
- 			, arrowTypes = ['image/png', 'image/jpeg', 'image/gif']
+ 			, reader
+ 			, arrowTypes = ['image/png', 'image/jpeg', 'image/gif', 'text/url']
  			, filedata
- 			;
- 		e.preventDefault();
- 		for(i = 0; i < data.files.length; i++){
- 			filedata = data.files[i];
- 			if(arrowTypes.indexOf(filedata.type) == -1){
- 				return;
- 			}
- 			reader.readAsDataURL(filedata);
-			reader.name = filedata.name;
-// 			recter.name = filedata.name;
- 		}
- 		reader.onload = function(e){
- 			let img = new Image();
-
-			img.onload = function(){
-				let el = body.firstElementChild;
-				let li = doc.createElement('li');
-				li.appendChild(img);
-				li.id = imglist.childElementCount;
-				li.style.opacity = 1;
-				imglist.appendChild(li);
-				body.insertBefore(li.cloneNode(true), imglist);
-				if(body.childElementCount > 3){
-					body.removeChild(body.firstElementChild);
-				}
-//				imglist.seekIndex = imglist.childElementCount - 1;
-	//			console.log(imglist.seekIndex);
- 			};
- 			img.src = e.target.result;
-			img.name = reader.name;
-		};
+			, files
+		;
+		e.preventDefault();
 
 		let ins = body.querySelectorAll('.adsbygoogle');
 		for (let i = 0; i < ins.length; i++){
 			body.removeChild(ins[i]);
 		}
+
+		files = data.getData('url');
+		if (files.length > 0) {
+			loadImg(files);
+			return;
+		}
+		files = data.files;
+ 		for(i = 0; i < files.length; i++){
+ 			filedata = files[i];
+ 			if(arrowTypes.indexOf(filedata.type) == -1){
+ 				return;
+ 			}
+			reader = new FileReader()
+ 			reader.readAsDataURL(filedata);
+			reader.name = filedata.name;
+			reader.onload = function(e){
+				loadImg(e.target.result, reader.name);
+			};
+// 			recter.name = filedata.name;
+ 		}
+
  	}
+
+	function loadImg(src, name){
+		let img = new Image();
+		img.onload = function(){
+			let el = body.firstElementChild;
+			let li = doc.createElement('li');
+			li.appendChild(img);
+			li.id = imglist.childElementCount;
+			li.style.opacity = 1;
+			imglist.appendChild(li);
+			body.insertBefore(li.cloneNode(true), imglist);
+			if(body.childElementCount > 3){
+				body.removeChild(body.firstElementChild);
+			}
+		};
+		img.src = src;
+		img.name = name ? name : src.replace(/.*\/+?(.*)/,'$1');
+	}
+
 
  	body.ondrop = dropFile;
  	body.ondragover= dragoverFile;
