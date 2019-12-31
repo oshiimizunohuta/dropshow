@@ -10,9 +10,6 @@
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="./img/ds.png">
 		<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.png">
-		<!-- <link rel="stylesheet" type="text/css" href="./style.css" media="all"> -->
-
-		<!-- <script src="/js/lib/jquery-2.0.0.min.js"></script> -->
 		<script src="./dropshow.js"></script>
 		<style>
 		html, body{
@@ -35,8 +32,21 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
+			font-size: 0;
+		}
+		body>div{
+			margin: 0;
+			padding: 0;
+			height: 78%;
+			width:100%;
+			position: fixed;
+			top: 0;
+			line-height: 0;
+			text-align: center;
+			z-index: 1000;
 		}
 		ol{
+			transition-duration: 0.5s;
 			background:hsla(196,100%,17%,0.4);
 			margin: 0;
 			padding: 0;
@@ -46,6 +56,7 @@
 			bottom: 0;
 			line-height: 0;
 			text-align: center;
+			z-index: 1000;
 		}
 		ol li{
 			height: 90%;
@@ -56,6 +67,7 @@
 		}
 
 		 li img{
+			transition-duration: 0.3s;
 			height: 100%;
 			width: auto;
 			margin: auto;
